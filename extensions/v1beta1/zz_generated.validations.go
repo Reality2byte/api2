@@ -77,9 +77,11 @@ func Validate_IPBlock(
 	ctx context.Context, op operation.Operation, fldPath *field.Path,
 	obj, oldObj *IPBlock) (errs field.ErrorList) {
 
-	// field IPBlock.CIDR
-	errs = append(errs,
-		func(fldPath *field.Path, obj, oldObj *string, oldValueCorrelated bool) (errs field.ErrorList) {
+	{ // field IPBlock.CIDR
+		fn := func(
+			fldPath *field.Path,
+			obj, oldObj *string,
+			oldValueCorrelated bool) (errs field.ErrorList) {
 			// don't revalidate unchanged data
 			if oldValueCorrelated && op.Type == operation.Update && (obj == oldObj || (obj != nil && oldObj != nil && *obj == *oldObj)) {
 				return nil
@@ -94,7 +96,13 @@ func Validate_IPBlock(
 				return // do not proceed
 			}
 			return
-		}(fldPath.Child("cidr"), &obj.CIDR, safe.Field(oldObj, func(oldObj *IPBlock) *string { return &oldObj.CIDR }), oldObj != nil)...)
+		}
+		oldVal := safe.Field(oldObj,
+			func(oldObj *IPBlock) *string {
+				return &oldObj.CIDR
+			})
+		errs = append(errs, fn(fldPath.Child("cidr"), &obj.CIDR, oldVal, oldObj != nil)...)
+	}
 
 	// field IPBlock.Except has no validation
 	return errs
@@ -109,9 +117,11 @@ func Validate_NetworkPolicy(
 	// field NetworkPolicy.TypeMeta has no validation
 	// field NetworkPolicy.ObjectMeta has no validation
 
-	// field NetworkPolicy.Spec
-	errs = append(errs,
-		func(fldPath *field.Path, obj, oldObj *NetworkPolicySpec, oldValueCorrelated bool) (errs field.ErrorList) {
+	{ // field NetworkPolicy.Spec
+		fn := func(
+			fldPath *field.Path,
+			obj, oldObj *NetworkPolicySpec,
+			oldValueCorrelated bool) (errs field.ErrorList) {
 			// don't revalidate unchanged data
 			if oldValueCorrelated && op.Type == operation.Update && equality.Semantic.DeepEqual(obj, oldObj) {
 				return nil
@@ -119,7 +129,13 @@ func Validate_NetworkPolicy(
 			// call the type's validation function
 			errs = append(errs, Validate_NetworkPolicySpec(ctx, op, fldPath, obj, oldObj)...)
 			return
-		}(fldPath.Child("spec"), &obj.Spec, safe.Field(oldObj, func(oldObj *NetworkPolicy) *NetworkPolicySpec { return &oldObj.Spec }), oldObj != nil)...)
+		}
+		oldVal := safe.Field(oldObj,
+			func(oldObj *NetworkPolicy) *NetworkPolicySpec {
+				return &oldObj.Spec
+			})
+		errs = append(errs, fn(fldPath.Child("spec"), &obj.Spec, oldVal, oldObj != nil)...)
+	}
 
 	return errs
 }
@@ -132,9 +148,11 @@ func Validate_NetworkPolicyEgressRule(
 
 	// field NetworkPolicyEgressRule.Ports has no validation
 
-	// field NetworkPolicyEgressRule.To
-	errs = append(errs,
-		func(fldPath *field.Path, obj, oldObj []NetworkPolicyPeer, oldValueCorrelated bool) (errs field.ErrorList) {
+	{ // field NetworkPolicyEgressRule.To
+		fn := func(
+			fldPath *field.Path,
+			obj, oldObj []NetworkPolicyPeer,
+			oldValueCorrelated bool) (errs field.ErrorList) {
 			// don't revalidate unchanged data
 			if oldValueCorrelated && op.Type == operation.Update && equality.Semantic.DeepEqual(obj, oldObj) {
 				return nil
@@ -150,7 +168,13 @@ func Validate_NetworkPolicyEgressRule(
 			// iterate the list and call the type's validation function
 			errs = append(errs, validate.EachSliceVal(ctx, op, fldPath, obj, oldObj, nil, nil, Validate_NetworkPolicyPeer)...)
 			return
-		}(fldPath.Child("to"), obj.To, safe.Field(oldObj, func(oldObj *NetworkPolicyEgressRule) []NetworkPolicyPeer { return oldObj.To }), oldObj != nil)...)
+		}
+		oldVal := safe.Field(oldObj,
+			func(oldObj *NetworkPolicyEgressRule) []NetworkPolicyPeer {
+				return oldObj.To
+			})
+		errs = append(errs, fn(fldPath.Child("to"), obj.To, oldVal, oldObj != nil)...)
+	}
 
 	return errs
 }
@@ -163,9 +187,11 @@ func Validate_NetworkPolicyIngressRule(
 
 	// field NetworkPolicyIngressRule.Ports has no validation
 
-	// field NetworkPolicyIngressRule.From
-	errs = append(errs,
-		func(fldPath *field.Path, obj, oldObj []NetworkPolicyPeer, oldValueCorrelated bool) (errs field.ErrorList) {
+	{ // field NetworkPolicyIngressRule.From
+		fn := func(
+			fldPath *field.Path,
+			obj, oldObj []NetworkPolicyPeer,
+			oldValueCorrelated bool) (errs field.ErrorList) {
 			// don't revalidate unchanged data
 			if oldValueCorrelated && op.Type == operation.Update && equality.Semantic.DeepEqual(obj, oldObj) {
 				return nil
@@ -181,7 +207,13 @@ func Validate_NetworkPolicyIngressRule(
 			// iterate the list and call the type's validation function
 			errs = append(errs, validate.EachSliceVal(ctx, op, fldPath, obj, oldObj, nil, nil, Validate_NetworkPolicyPeer)...)
 			return
-		}(fldPath.Child("from"), obj.From, safe.Field(oldObj, func(oldObj *NetworkPolicyIngressRule) []NetworkPolicyPeer { return oldObj.From }), oldObj != nil)...)
+		}
+		oldVal := safe.Field(oldObj,
+			func(oldObj *NetworkPolicyIngressRule) []NetworkPolicyPeer {
+				return oldObj.From
+			})
+		errs = append(errs, fn(fldPath.Child("from"), obj.From, oldVal, oldObj != nil)...)
+	}
 
 	return errs
 }
@@ -195,9 +227,11 @@ func Validate_NetworkPolicyPeer(
 	// field NetworkPolicyPeer.PodSelector has no validation
 	// field NetworkPolicyPeer.NamespaceSelector has no validation
 
-	// field NetworkPolicyPeer.IPBlock
-	errs = append(errs,
-		func(fldPath *field.Path, obj, oldObj *IPBlock, oldValueCorrelated bool) (errs field.ErrorList) {
+	{ // field NetworkPolicyPeer.IPBlock
+		fn := func(
+			fldPath *field.Path,
+			obj, oldObj *IPBlock,
+			oldValueCorrelated bool) (errs field.ErrorList) {
 			// don't revalidate unchanged data
 			if oldValueCorrelated && op.Type == operation.Update && equality.Semantic.DeepEqual(obj, oldObj) {
 				return nil
@@ -213,7 +247,13 @@ func Validate_NetworkPolicyPeer(
 			// call the type's validation function
 			errs = append(errs, Validate_IPBlock(ctx, op, fldPath, obj, oldObj)...)
 			return
-		}(fldPath.Child("ipBlock"), obj.IPBlock, safe.Field(oldObj, func(oldObj *NetworkPolicyPeer) *IPBlock { return oldObj.IPBlock }), oldObj != nil)...)
+		}
+		oldVal := safe.Field(oldObj,
+			func(oldObj *NetworkPolicyPeer) *IPBlock {
+				return oldObj.IPBlock
+			})
+		errs = append(errs, fn(fldPath.Child("ipBlock"), obj.IPBlock, oldVal, oldObj != nil)...)
+	}
 
 	return errs
 }
@@ -226,9 +266,11 @@ func Validate_NetworkPolicySpec(
 
 	// field NetworkPolicySpec.PodSelector has no validation
 
-	// field NetworkPolicySpec.Ingress
-	errs = append(errs,
-		func(fldPath *field.Path, obj, oldObj []NetworkPolicyIngressRule, oldValueCorrelated bool) (errs field.ErrorList) {
+	{ // field NetworkPolicySpec.Ingress
+		fn := func(
+			fldPath *field.Path,
+			obj, oldObj []NetworkPolicyIngressRule,
+			oldValueCorrelated bool) (errs field.ErrorList) {
 			// don't revalidate unchanged data
 			if oldValueCorrelated && op.Type == operation.Update && equality.Semantic.DeepEqual(obj, oldObj) {
 				return nil
@@ -244,11 +286,19 @@ func Validate_NetworkPolicySpec(
 			// iterate the list and call the type's validation function
 			errs = append(errs, validate.EachSliceVal(ctx, op, fldPath, obj, oldObj, nil, nil, Validate_NetworkPolicyIngressRule)...)
 			return
-		}(fldPath.Child("ingress"), obj.Ingress, safe.Field(oldObj, func(oldObj *NetworkPolicySpec) []NetworkPolicyIngressRule { return oldObj.Ingress }), oldObj != nil)...)
+		}
+		oldVal := safe.Field(oldObj,
+			func(oldObj *NetworkPolicySpec) []NetworkPolicyIngressRule {
+				return oldObj.Ingress
+			})
+		errs = append(errs, fn(fldPath.Child("ingress"), obj.Ingress, oldVal, oldObj != nil)...)
+	}
 
-	// field NetworkPolicySpec.Egress
-	errs = append(errs,
-		func(fldPath *field.Path, obj, oldObj []NetworkPolicyEgressRule, oldValueCorrelated bool) (errs field.ErrorList) {
+	{ // field NetworkPolicySpec.Egress
+		fn := func(
+			fldPath *field.Path,
+			obj, oldObj []NetworkPolicyEgressRule,
+			oldValueCorrelated bool) (errs field.ErrorList) {
 			// don't revalidate unchanged data
 			if oldValueCorrelated && op.Type == operation.Update && equality.Semantic.DeepEqual(obj, oldObj) {
 				return nil
@@ -264,7 +314,13 @@ func Validate_NetworkPolicySpec(
 			// iterate the list and call the type's validation function
 			errs = append(errs, validate.EachSliceVal(ctx, op, fldPath, obj, oldObj, nil, nil, Validate_NetworkPolicyEgressRule)...)
 			return
-		}(fldPath.Child("egress"), obj.Egress, safe.Field(oldObj, func(oldObj *NetworkPolicySpec) []NetworkPolicyEgressRule { return oldObj.Egress }), oldObj != nil)...)
+		}
+		oldVal := safe.Field(oldObj,
+			func(oldObj *NetworkPolicySpec) []NetworkPolicyEgressRule {
+				return oldObj.Egress
+			})
+		errs = append(errs, fn(fldPath.Child("egress"), obj.Egress, oldVal, oldObj != nil)...)
+	}
 
 	// field NetworkPolicySpec.PolicyTypes has no validation
 	return errs
@@ -279,9 +335,11 @@ func Validate_Scale(
 	// field Scale.TypeMeta has no validation
 	// field Scale.ObjectMeta has no validation
 
-	// field Scale.Spec
-	errs = append(errs,
-		func(fldPath *field.Path, obj, oldObj *ScaleSpec, oldValueCorrelated bool) (errs field.ErrorList) {
+	{ // field Scale.Spec
+		fn := func(
+			fldPath *field.Path,
+			obj, oldObj *ScaleSpec,
+			oldValueCorrelated bool) (errs field.ErrorList) {
 			// don't revalidate unchanged data
 			if oldValueCorrelated && op.Type == operation.Update && (obj == oldObj || (obj != nil && oldObj != nil && *obj == *oldObj)) {
 				return nil
@@ -289,7 +347,13 @@ func Validate_Scale(
 			// call the type's validation function
 			errs = append(errs, Validate_ScaleSpec(ctx, op, fldPath, obj, oldObj)...)
 			return
-		}(fldPath.Child("spec"), &obj.Spec, safe.Field(oldObj, func(oldObj *Scale) *ScaleSpec { return &oldObj.Spec }), oldObj != nil)...)
+		}
+		oldVal := safe.Field(oldObj,
+			func(oldObj *Scale) *ScaleSpec {
+				return &oldObj.Spec
+			})
+		errs = append(errs, fn(fldPath.Child("spec"), &obj.Spec, oldVal, oldObj != nil)...)
+	}
 
 	// field Scale.Status has no validation
 	return errs
@@ -301,9 +365,11 @@ func Validate_ScaleSpec(
 	ctx context.Context, op operation.Operation, fldPath *field.Path,
 	obj, oldObj *ScaleSpec) (errs field.ErrorList) {
 
-	// field ScaleSpec.Replicas
-	errs = append(errs,
-		func(fldPath *field.Path, obj, oldObj *int32, oldValueCorrelated bool) (errs field.ErrorList) {
+	{ // field ScaleSpec.Replicas
+		fn := func(
+			fldPath *field.Path,
+			obj, oldObj *int32,
+			oldValueCorrelated bool) (errs field.ErrorList) {
 			// optional value-type fields with zero-value defaults are purely documentation
 			// don't revalidate unchanged data
 			if oldValueCorrelated && op.Type == operation.Update && (obj == oldObj || (obj != nil && oldObj != nil && *obj == *oldObj)) {
@@ -312,7 +378,13 @@ func Validate_ScaleSpec(
 			// call field-attached validations
 			errs = append(errs, validate.Minimum(ctx, op, fldPath, obj, oldObj, 0).MarkAlpha()...)
 			return
-		}(fldPath.Child("replicas"), &obj.Replicas, safe.Field(oldObj, func(oldObj *ScaleSpec) *int32 { return &oldObj.Replicas }), oldObj != nil)...)
+		}
+		oldVal := safe.Field(oldObj,
+			func(oldObj *ScaleSpec) *int32 {
+				return &oldObj.Replicas
+			})
+		errs = append(errs, fn(fldPath.Child("replicas"), &obj.Replicas, oldVal, oldObj != nil)...)
+	}
 
 	return errs
 }
