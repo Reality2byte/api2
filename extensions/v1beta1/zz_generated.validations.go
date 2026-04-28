@@ -73,7 +73,10 @@ func RegisterValidations(scheme *runtime.Scheme) error {
 
 // Validate_IPBlock validates an instance of IPBlock according
 // to declarative validation rules in the API schema.
-func Validate_IPBlock(ctx context.Context, op operation.Operation, fldPath *field.Path, obj, oldObj *IPBlock) (errs field.ErrorList) {
+func Validate_IPBlock(
+	ctx context.Context, op operation.Operation, fldPath *field.Path,
+	obj, oldObj *IPBlock) (errs field.ErrorList) {
+
 	// field IPBlock.CIDR
 	errs = append(errs,
 		func(fldPath *field.Path, obj, oldObj *string, oldValueCorrelated bool) (errs field.ErrorList) {
@@ -99,7 +102,10 @@ func Validate_IPBlock(ctx context.Context, op operation.Operation, fldPath *fiel
 
 // Validate_NetworkPolicy validates an instance of NetworkPolicy according
 // to declarative validation rules in the API schema.
-func Validate_NetworkPolicy(ctx context.Context, op operation.Operation, fldPath *field.Path, obj, oldObj *NetworkPolicy) (errs field.ErrorList) {
+func Validate_NetworkPolicy(
+	ctx context.Context, op operation.Operation, fldPath *field.Path,
+	obj, oldObj *NetworkPolicy) (errs field.ErrorList) {
+
 	// field NetworkPolicy.TypeMeta has no validation
 	// field NetworkPolicy.ObjectMeta has no validation
 
@@ -120,7 +126,10 @@ func Validate_NetworkPolicy(ctx context.Context, op operation.Operation, fldPath
 
 // Validate_NetworkPolicyEgressRule validates an instance of NetworkPolicyEgressRule according
 // to declarative validation rules in the API schema.
-func Validate_NetworkPolicyEgressRule(ctx context.Context, op operation.Operation, fldPath *field.Path, obj, oldObj *NetworkPolicyEgressRule) (errs field.ErrorList) {
+func Validate_NetworkPolicyEgressRule(
+	ctx context.Context, op operation.Operation, fldPath *field.Path,
+	obj, oldObj *NetworkPolicyEgressRule) (errs field.ErrorList) {
+
 	// field NetworkPolicyEgressRule.Ports has no validation
 
 	// field NetworkPolicyEgressRule.To
@@ -148,7 +157,10 @@ func Validate_NetworkPolicyEgressRule(ctx context.Context, op operation.Operatio
 
 // Validate_NetworkPolicyIngressRule validates an instance of NetworkPolicyIngressRule according
 // to declarative validation rules in the API schema.
-func Validate_NetworkPolicyIngressRule(ctx context.Context, op operation.Operation, fldPath *field.Path, obj, oldObj *NetworkPolicyIngressRule) (errs field.ErrorList) {
+func Validate_NetworkPolicyIngressRule(
+	ctx context.Context, op operation.Operation, fldPath *field.Path,
+	obj, oldObj *NetworkPolicyIngressRule) (errs field.ErrorList) {
+
 	// field NetworkPolicyIngressRule.Ports has no validation
 
 	// field NetworkPolicyIngressRule.From
@@ -176,7 +188,10 @@ func Validate_NetworkPolicyIngressRule(ctx context.Context, op operation.Operati
 
 // Validate_NetworkPolicyPeer validates an instance of NetworkPolicyPeer according
 // to declarative validation rules in the API schema.
-func Validate_NetworkPolicyPeer(ctx context.Context, op operation.Operation, fldPath *field.Path, obj, oldObj *NetworkPolicyPeer) (errs field.ErrorList) {
+func Validate_NetworkPolicyPeer(
+	ctx context.Context, op operation.Operation, fldPath *field.Path,
+	obj, oldObj *NetworkPolicyPeer) (errs field.ErrorList) {
+
 	// field NetworkPolicyPeer.PodSelector has no validation
 	// field NetworkPolicyPeer.NamespaceSelector has no validation
 
@@ -205,7 +220,10 @@ func Validate_NetworkPolicyPeer(ctx context.Context, op operation.Operation, fld
 
 // Validate_NetworkPolicySpec validates an instance of NetworkPolicySpec according
 // to declarative validation rules in the API schema.
-func Validate_NetworkPolicySpec(ctx context.Context, op operation.Operation, fldPath *field.Path, obj, oldObj *NetworkPolicySpec) (errs field.ErrorList) {
+func Validate_NetworkPolicySpec(
+	ctx context.Context, op operation.Operation, fldPath *field.Path,
+	obj, oldObj *NetworkPolicySpec) (errs field.ErrorList) {
+
 	// field NetworkPolicySpec.PodSelector has no validation
 
 	// field NetworkPolicySpec.Ingress
@@ -254,7 +272,10 @@ func Validate_NetworkPolicySpec(ctx context.Context, op operation.Operation, fld
 
 // Validate_Scale validates an instance of Scale according
 // to declarative validation rules in the API schema.
-func Validate_Scale(ctx context.Context, op operation.Operation, fldPath *field.Path, obj, oldObj *Scale) (errs field.ErrorList) {
+func Validate_Scale(
+	ctx context.Context, op operation.Operation, fldPath *field.Path,
+	obj, oldObj *Scale) (errs field.ErrorList) {
+
 	// field Scale.TypeMeta has no validation
 	// field Scale.ObjectMeta has no validation
 
@@ -276,7 +297,10 @@ func Validate_Scale(ctx context.Context, op operation.Operation, fldPath *field.
 
 // Validate_ScaleSpec validates an instance of ScaleSpec according
 // to declarative validation rules in the API schema.
-func Validate_ScaleSpec(ctx context.Context, op operation.Operation, fldPath *field.Path, obj, oldObj *ScaleSpec) (errs field.ErrorList) {
+func Validate_ScaleSpec(
+	ctx context.Context, op operation.Operation, fldPath *field.Path,
+	obj, oldObj *ScaleSpec) (errs field.ErrorList) {
+
 	// field ScaleSpec.Replicas
 	errs = append(errs,
 		func(fldPath *field.Path, obj, oldObj *int32, oldValueCorrelated bool) (errs field.ErrorList) {
