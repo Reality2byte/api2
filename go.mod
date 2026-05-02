@@ -7,7 +7,7 @@ go 1.26.0
 godebug default=go1.26
 
 require (
-	k8s.io/apimachinery v0.0.0-20260429230514-2bb458402487
+	k8s.io/apimachinery v0.0.0-20260502010923-32968db39b14
 	k8s.io/klog/v2 v2.140.0
 )
 
